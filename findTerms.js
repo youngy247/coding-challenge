@@ -63,3 +63,32 @@ function findTermInstances(text, terms) {
   // Return the list of matched terms.
   return matchedTerms;
 }
+
+// Test examples.
+console.log(
+  findTermInstances("You must ensure that your fees are not high", "you"),
+  ["You", "your"]
+);
+
+console.log(
+  findTermInstances("The Customer is always right", "Customer, you"),
+  ["Customer"]
+);
+
+console.log(
+  findTermInstances("The Customer is not our client", "Customer, us"),
+  ["Customer", "our"]
+);
+
+console.log(
+  findTermInstances(
+    "My rights cannot be abridged by myself, only the Client",
+    "I, Client"
+  ),
+  ["My", "myself", "Client"]
+);
+
+console.log(
+  findTermInstances("i) In this clause my documents are read", "Me"),
+  ["my"]
+);
