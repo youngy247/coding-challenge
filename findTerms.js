@@ -15,9 +15,10 @@ function findTermInstances(text, terms) {
     return false;
   };
 
-  // Clean a word by removing non-alphabetical characters.
+  // Cleans a word by retaining only letters, apostrophes and hyphens.
   const cleanWord = (word) => {
-    return word.replace(/[^a-zA-Z]/g, "");
+    // If you need to include more punctuation or symbols in the future, adjust the regex pattern accordingly.
+    return word.replace(/[^a-zA-Z'-]/g, "");
   };
 
   // Check and add a word to matched terms if it's in termsToCheck.
