@@ -15,5 +15,36 @@ function findTermInstances(text, terms) {
   // Split the input text by spaces and remove any non-alphabetical characters from each word.
   const words = text.split(" ").map((word) => word.replace(/[^a-zA-Z]/g, ""));
 
+  // Initialize an array to store the final list of terms we need to check against the text.
+  let termsToCheck = [];
+
+  // Loop over each term in the termList.
+  for (let i = 0; i < termList.length; i++) {
+    let isPronoun = false;
+
+    // Extract the keys (types of pronoun groupings) from the pronouns object.
+    const pronounTypes = Object.keys(pronouns);
+
+    // Loop over each pronoun type to check if the term is a pronoun.
+    for (let j = 0; j < pronounTypes.length; j++) {
+      // If the current term is found in any of the pronoun lists,
+      // add all pronouns from that list to termsToCheck.
+      if (
+        pronouns[pronounTypes[j]]
+          .map((p) => p.toLowerCase())
+          .includes(termList[i])
+      ) {
+        termsToCheck = termsToCheck.concat(pronouns[pronounTypes[j]]);
+        isPronoun = true;
+        break; // exit the loop once a match is found.
+      }
+    }
+
+    // If the current term wasn't a pronoun, add it directly to termsToCheck.
+    if (!isPronoun) {
+      termsToCheck.push(termList[i]);
+    }
+  }
+
   // TODO: Rest of the implementation
 }
