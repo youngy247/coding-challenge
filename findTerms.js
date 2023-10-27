@@ -5,6 +5,7 @@ function findTermInstances(text, terms) {
     secondPersonSingular: ["you", "your", "yourself"],
   };
 
+  // Determine if a term is a pronoun and return its list.
   const isPronoun = (term) => {
     for (let key in pronouns) {
       if (pronouns[key].map((p) => p.toLowerCase()).includes(term)) {
@@ -14,10 +15,12 @@ function findTermInstances(text, terms) {
     return false;
   };
 
+  // Clean a word by removing non-alphabetical characters.
   const cleanWord = (word) => {
     return word.replace(/[^a-zA-Z]/g, "");
   };
 
+  // Check and add a word to matched terms if it's in termsToCheck.
   const addToMatchedTerms = (word, termsToCheck, matchedTerms) => {
     if (
       termsToCheck.includes(word) ||
@@ -29,11 +32,13 @@ function findTermInstances(text, terms) {
     }
   };
 
+  // Prepare terms and words for processing.
   const termList = terms.split(",").map((term) => term.trim().toLowerCase());
   const words = text.split(" ").map(cleanWord);
   const matchedTerms = [];
   let termsToCheck = [];
 
+  // Populate termsToCheck with either the term itself or its associated pronoun list.
   termList.forEach((term) => {
     const pronounList = isPronoun(term);
     if (pronounList) {
@@ -43,6 +48,7 @@ function findTermInstances(text, terms) {
     }
   });
 
+  // Find matched terms in the input text.
   words.forEach((word) => {
     addToMatchedTerms(word, termsToCheck, matchedTerms);
   });
