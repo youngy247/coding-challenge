@@ -46,5 +46,20 @@ function findTermInstances(text, terms) {
     }
   }
 
-  // TODO: Rest of the implementation
+  // Loop over each word in the text.
+  for (let i = 0; i < words.length; i++) {
+    // If the word (or its lowercase version) is in termsToCheck and not yet in matchedTerms,
+    // add it to matchedTerms.
+    if (
+      termsToCheck.includes(words[i]) ||
+      termsToCheck.includes(words[i].toLowerCase())
+    ) {
+      if (!matchedTerms.includes(words[i])) {
+        matchedTerms.push(words[i]);
+      }
+    }
+  }
+
+  // Return the list of matched terms.
+  return matchedTerms;
 }
